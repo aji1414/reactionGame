@@ -1,5 +1,5 @@
 // external libraries and stylesheet
-import React, { Component } from "react";
+import React from "react";
 import './App.styles.scss';
 
 // components
