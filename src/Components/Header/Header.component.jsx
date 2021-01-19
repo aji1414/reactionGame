@@ -9,7 +9,7 @@ import {Navbar, Nav, NavDropdown, Form, FormControl, Button} from 'react-bootstr
 
 
 const Header = () => (
-    <Navbar className="p-0 pt-1 d-flex navbarContainer" expand="lg">
+    <Navbar className="p-0 py-2 d-flex navbarContainer" expand="lg">
         <Navbar.Brand className="p-0 mr-0 col-6 navbarTitle" href="#home">F1 Race Start</Navbar.Brand>
         {/* <Navbar.Toggle className="navToggle" aria-controls="basic-navbar-nav" /> */}
         <Nav.Link className="p-0 col-3 navLink" href="#home">Home</Nav.Link>

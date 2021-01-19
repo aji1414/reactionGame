@@ -1,7 +1,7 @@
 .navbarContainer{
     background:white;
     color:black;
-
+    height: 10vh;
 
 
     .navbarTitle{
@@ -9,7 +9,9 @@
         font-size:1.3em;
     }
 
-    .navLink{
+    .navLink {
         font-size:1.1em;
+        color:black !important;
+        font-weight: 500;
     }
 }

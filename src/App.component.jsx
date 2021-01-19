@@ -4,11 +4,13 @@ import './App.styles.scss';
 
 // components
 import Header from "./Components/Header/Header.component";
+import Game from "./Components/Game/Game.component";
 
 function App() {
   return (
     <div className="App">
       <Header />
+      <Game />
     </div>
   );
 }
