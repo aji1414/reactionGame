@@ -1,9 +1,11 @@
 // external libraries and stylesheet
 import React,{useState} from "react";
-// import './Game.styles.jsx';
+import ReactDOM from 'react-dom'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faBolt } from '@fortawesome/free-solid-svg-icons'
 
 // components
-import {GameContainer, GameTitle, GameHint, GamePreview} from "./Game.styles.jsx";
+import {GameContainer, GameTitle, GameHint, GamePreview, Lightning} from "./Game.styles.jsx";
 import Lights from "../Lights/Lights.component";
 
 // redux actions
@@ -15,6 +17,7 @@ const Game = () => {
     return (
         <GameContainer  >
             <GamePreview gameStart={gameStart} onClick={() => setGameStart(true)}>
+                <Lightning icon={faBolt} size="10x" />
                 <GameTitle>
                     How fast can you react?
                 </GameTitle>

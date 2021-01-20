@@ -1,4 +1,6 @@
 import styled from "styled-components";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+
 
 export const GameContainer = styled.div `
     height:90vh;
@@ -7,6 +9,10 @@ export const GameContainer = styled.div `
     cursor:pointer;
 `;
 
+export const Lightning = styled(FontAwesomeIcon)`
+    color:#d8f008;
+    margin: 0 auto;
+`
 
 export const GamePreview = styled.div `
     display: ${props => props.gameStart === true ? "none" : "flex"};
