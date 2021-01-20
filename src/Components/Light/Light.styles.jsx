@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 
 export const LightContainer = styled.div`
@@ -15,7 +14,7 @@ export const LightBulb = styled.div`
     margin: 10px 0;
     border-radius:50%;
     margin: 0 auto;
-    background:grey;
+    background: ${props => props.lightsOn === true ? "red" : "grey"};
     width:12vw;
     height:15vh;
 

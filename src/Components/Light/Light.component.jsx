@@ -3,16 +3,15 @@ import React, { Component } from "react";
 
 // components
 import {LightContainer, LightBulb} from "./Light.styles.jsx";
-import TrafficLight from "react-trafficlight";
 
 // redux actions
-const Light = () => {
+const Light = ({lightsOn}) => {
     return(
         <LightContainer>
-            <LightBulb />
-            <LightBulb />
-            <LightBulb />
-            <LightBulb />
+            <LightBulb lightsOn={lightsOn} />
+            <LightBulb lightsOn={lightsOn} />
+            <LightBulb lightsOn={lightsOn} />
+            <LightBulb lightsOn={lightsOn} />
         </LightContainer>
     );
 };
