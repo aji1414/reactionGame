@@ -12,12 +12,12 @@ import Lights from "../Lights/Lights.component";
 
 const Game = () => {
     
-    const [gameStart, setGameStart] = useState(false);
+    const [gameStart, setGameStart] = useState(true);
     
     return (
         <GameContainer  >
             <GamePreview gameStart={gameStart} onClick={() => setGameStart(true)}>
-                <Lightning icon={faBolt} size="10x" />
+                <Lightning icon={faBolt} size="8x" />
                 <GameTitle>
                     How fast can you react?
                 </GameTitle>

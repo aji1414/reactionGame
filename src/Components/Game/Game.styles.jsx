@@ -12,6 +12,8 @@ export const GameContainer = styled.div `
 export const Lightning = styled(FontAwesomeIcon)`
     color:#d8f008;
     margin: 0 auto;
+    margin-top:5vh;
+    padding:0;
 `
 
 export const GamePreview = styled.div `
@@ -29,7 +31,7 @@ export const GameTitle = styled.h1`
     flex-direction:column;
     justify-content:center;
     margin:0 auto;
-    font-size:5em;
+    font-size:3em;
     font-weight:700;
     
 `;
