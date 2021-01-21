@@ -26,7 +26,12 @@ const Game = () => {
                 </GameHint>
             </GamePreview>
             
+            {gameStart === true ?
             <Lights gameStart={gameStart}/>
+            :
+            null
+            }
+            
         </GameContainer>
     )
 };

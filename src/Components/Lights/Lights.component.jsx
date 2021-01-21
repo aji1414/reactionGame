@@ -12,7 +12,7 @@ class Lights extends Component  {
     state={
         lightsState:[false,false,false],
         beginStartSequence: false,
-        lightsOut:false
+        lightsOut:false,
     }
 
     componentDidMount(){
@@ -58,15 +58,10 @@ class Lights extends Component  {
 
     render(){
         const {gameStart} = this.props;
-        const {lightsState, lightsOut, hasMounted} = this.state;
-
-        if(gameStart  && hasMounted === false){
-            this.setState({...this.state, hasMounted: true},
-                ()=> this.lightSequence())
-        }
+        const {lightsState, lightsOut} = this.state;
 
         return(
-        <LightsContainer lightsOut={lightsOut} onClick={this.lightSequence} gameStart={gameStart}>
+        <LightsContainer lightsOut={lightsOut} gameStart={gameStart}>
             <LightsInnerContainer>
                 <Light lightsOn={lightsState[0]} />
                 <Light lightsOn={lightsState[1]} />
