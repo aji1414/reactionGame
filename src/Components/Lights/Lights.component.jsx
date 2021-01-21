@@ -17,17 +17,8 @@ class Lights extends Component  {
 
     componentDidMount(){
         this.setState({...this.state, beginStartSequence:true}, 
-            () => setInterval(
-                () => {
-                    if(this.state.lightsState[2] === false){
-                        this.lightSequence();
-                    }
-                    else{
-                        console.log("ready to blow");
-                        return;
-                    }
-                }
-                ,1500));
+            () => setTimeout(()=> this.lightSequence(), 1500)
+        )
     }
 
     lightSequence = () => {
@@ -45,16 +36,31 @@ class Lights extends Component  {
                 :
                 light 
             )
+        }, () => {
+            if(this.state.lightsState[2] === false){
+                setTimeout(() => this.lightSequence()
+                , 1500);
+            }
+            else{
+                const [max,min] = [4,1.5];
+                const randomNum = Math.random() * (max - min + 1) + min;
+                setTimeout(()=> this.setState({
+                    ...this.state,
+                    lightsState:[false, false, false],
+                    lightsOut: true
+                })
+                ,randomNum * 1000)
+            }
         })
     };
 
 
     render(){
         const {gameStart} = this.props;
-        const {lightsState} = this.state;
+        const {lightsState, lightsOut} = this.state;
 
         return(
-        <LightsContainer onClick={this.lightSequence} gameStart={gameStart}>
+        <LightsContainer lightsOut={lightsOut} onClick={this.lightSequence} gameStart={gameStart}>
             <LightsInnerContainer>
                 <Light lightsOn={lightsState[0]} />
                 <Light lightsOn={lightsState[1]} />
