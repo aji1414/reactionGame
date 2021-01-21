@@ -16,7 +16,10 @@ const Game = () => {
     
     return (
         <GameContainer  >
-            <GamePreview gameStart={gameStart} onClick={() => setGameStart(true)}>
+            {gameStart === true ?
+            <Lights />
+            :
+            <GamePreview  onClick={() => setGameStart(true)}>
                 <Lightning icon={faBolt} size="8x" />
                 <GameTitle>
                     How fast can you react?
@@ -25,13 +28,7 @@ const Game = () => {
                     When the 5 lights go out, click anywhere on the screen as quickly as you can
                 </GameHint>
             </GamePreview>
-            
-            {gameStart === true ?
-            <Lights gameStart={gameStart}/>
-            :
-            null
             }
-            
         </GameContainer>
     )
 };

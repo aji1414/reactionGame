@@ -17,8 +17,10 @@ export const Lightning = styled(FontAwesomeIcon)`
 `
 
 export const GamePreview = styled.div `
-    display: ${props => props.gameStart === true ? "none" : "flex"};
-    background:${props => props.gameStart === true ? "green" : "red"};
+    /* display: ${props => props.gameStart === true ? "none" : "flex"}; */
+    display:flex;
+    /* background:${props => props.gameStart === true ? "green" : "#1c9bd6"}; */
+    background:#1c9bd6;
     padding:0 30px;
     height:90vh;
     flex-direction:column;

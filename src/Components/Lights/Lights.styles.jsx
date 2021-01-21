@@ -5,7 +5,8 @@ export const LightsContainer = styled.div`
     height:90vh;
     width:100vw;
     background:#000000;
-    display: ${props => props.gameStart === true ? "block" : "none"};
+    display:block;
+    /* display: ${props => props.gameStart === true ? "block" : "none"}; */
 `;
 
 
