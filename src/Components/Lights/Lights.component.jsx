@@ -16,6 +16,7 @@ class Lights extends Component  {
     }
 
     componentDidMount(){
+        
         this.setState({...this.state, beginStartSequence:true}, 
             () => setTimeout(()=> this.lightSequence(), 1500)
         )
@@ -57,7 +58,12 @@ class Lights extends Component  {
 
     render(){
         const {gameStart} = this.props;
-        const {lightsState, lightsOut} = this.state;
+        const {lightsState, lightsOut, hasMounted} = this.state;
+
+        if(gameStart  && hasMounted === false){
+            this.setState({...this.state, hasMounted: true},
+                ()=> this.lightSequence())
+        }
 
         return(
         <LightsContainer lightsOut={lightsOut} onClick={this.lightSequence} gameStart={gameStart}>

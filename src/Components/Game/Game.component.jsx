@@ -12,7 +12,7 @@ import Lights from "../Lights/Lights.component";
 
 const Game = () => {
     
-    const [gameStart, setGameStart] = useState(true);
+    const [gameStart, setGameStart] = useState(false);
     
     return (
         <GameContainer  >
