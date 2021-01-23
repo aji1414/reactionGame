@@ -5,14 +5,16 @@ import React, { useState, Component } from "react";
 import {LightsContainer, LightsInnerContainer} from "./Lights.styles.jsx";
 import Light from "../Light/Light.component";
 import { faBoxTissue } from "@fortawesome/free-solid-svg-icons";
+import performance from "performance-now";
 
 // redux actions
 class Lights extends Component  {
 
     state={
-        lightsState:[false,false,false],
+        lightsState:[true,true,false],
         beginStartSequence: false,
         lightsOut:false,
+        lightsOutTime: null
     }
 
     componentDidMount(){
@@ -43,25 +45,49 @@ class Lights extends Component  {
                 , 1500);
             }
             else{
-                const [max,min] = [4,1.5];
+                const [max,min] = [3,1.5];
                 const randomNum = Math.random() * (max - min + 1) + min;
+                const reactionTime = async () => {
+                    console.log("hello");
+                }
+                // const start = performance();
+                // const lightOut = performance();
+                // console.log(lightOut - start);
+
                 setTimeout(()=> this.setState({
                     ...this.state,
                     lightsState:[false, false, false],
-                    lightsOut: true
-                })
+                    lightsOut: true,
+                    lightsOutTime:performance()
+                }, () => performance)
                 ,randomNum * 1000)
             }
         })
     };
 
+    reactionTime = (lightsOutTime, reactTime) =>{
+        if(!lightsOutTime){
+            return alert("false start")
+        }
+        // console.log(lightsOutTime, reactTime)
+        console.log((reactTime - lightsOutTime) * 0.001)
+    }
+
 
     render(){
         const {gameStart} = this.props;
-        const {lightsState, lightsOut} = this.state;
+        const {lightsState, lightsOut, lightsOutTime} = this.state;
 
         return(
-        <LightsContainer lightsOut={lightsOut} gameStart={gameStart}>
+        <LightsContainer 
+        lightsOut={lightsOut} 
+        gameStart={gameStart} 
+        onMouseDown={() => 
+            {
+                const reactTime = performance(); 
+                this.reactionTime(lightsOutTime, reactTime);
+            }
+        }>
             <LightsInnerContainer>
                 <Light lightsOn={lightsState[0]} />
                 <Light lightsOn={lightsState[1]} />
