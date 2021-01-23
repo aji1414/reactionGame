@@ -11,7 +11,7 @@ import performance from "performance-now";
 class Lights extends Component  {
 
     state={
-        lightsState:[true,true,false],
+        lightsState:[false,false,false],
         beginStartSequence: false,
         lightsOut:false,
         lightsOutTime: null
@@ -47,12 +47,6 @@ class Lights extends Component  {
             else{
                 const [max,min] = [3,1.5];
                 const randomNum = Math.random() * (max - min + 1) + min;
-                const reactionTime = async () => {
-                    console.log("hello");
-                }
-                // const start = performance();
-                // const lightOut = performance();
-                // console.log(lightOut - start);
 
                 setTimeout(()=> this.setState({
                     ...this.state,
@@ -65,27 +59,31 @@ class Lights extends Component  {
         })
     };
 
-    reactionTime = (lightsOutTime, reactTime) =>{
+    reactionTime = (lightsOutTime, clickTime) =>{
         if(!lightsOutTime){
-            return alert("false start")
+            alert("FALSE START PLAYA")
+            this.props.resetCounter();
         }
-        // console.log(lightsOutTime, reactTime)
-        console.log((reactTime - lightsOutTime) * 0.001)
+        else{
+            const reactionTime = (clickTime - lightsOutTime) * 0.001;
+            const reactTimeDP = reactionTime.toFixed(3)
+            console.log(reactTimeDP);
+        }
     }
 
 
     render(){
-        const {gameStart} = this.props;
-        const {lightsState, lightsOut, lightsOutTime} = this.state;
+        const {gameStart, id} = this.props;
+        const {lightsState, lightsOut, lightsOutTime, remount} = this.state;
 
         return(
-        <LightsContainer 
+        <LightsContainer
         lightsOut={lightsOut} 
         gameStart={gameStart} 
         onMouseDown={() => 
             {
-                const reactTime = performance(); 
-                this.reactionTime(lightsOutTime, reactTime);
+                const clickTime = performance(); 
+                this.reactionTime(lightsOutTime, clickTime);
             }
         }>
             <LightsInnerContainer>
