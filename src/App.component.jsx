@@ -9,7 +9,7 @@ import Game from "./Components/Game/Game.component";
 function App() {
   return (
     <div className="App">
-      <Header />
+      {/* <Header /> */}
       <Game />
     </div>
   );

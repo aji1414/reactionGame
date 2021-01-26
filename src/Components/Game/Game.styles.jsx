@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 
 export const GameContainer = styled.div `
-    height:90vh;
+    height:100vh;
     width:100vw;
     color:white;
     cursor:pointer;
@@ -22,7 +22,7 @@ export const GamePreview = styled.div `
     /* background:${props => props.gameStart === true ? "green" : "#1c9bd6"}; */
     background:#1c9bd6;
     padding:0 30px;
-    height:90vh;
+    height:100%;
     flex-direction:column;
     justify-content:center;
     text-align:center;

@@ -14,25 +14,33 @@ class Game extends Component{
     
     state={
         gameStart: false,
+        attemptCount:0,
         remountKey: (new Date()).getTime()
     }
 
-    resetCounter = () => {
+    resetCounter = (newCount) => {
+        let newCountFinal = this.state.attemptCount;
+        if(newCount){newCountFinal = newCount;}
+
         this.setState({
+            ...this.state,
           remountKey: (new Date()).getTime(),
+          attemptCount: newCountFinal
         });
       }
     
 
     render(){
-        const {gameStart, remountKey} = this.state;
-
+        const {gameStart, remountKey, attemptCount} = this.state;
+        
         return (
             <GameContainer  >
+                
                 {gameStart === true ?
                 <Lights 
                 gameStart={gameStart} 
                 key={remountKey}
+                attemptCount={attemptCount}
                 resetCounter={this.resetCounter}
                 />
                 :

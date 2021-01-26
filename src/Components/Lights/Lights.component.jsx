@@ -6,6 +6,7 @@ import {LightsContainer, LightsInnerContainer} from "./Lights.styles.jsx";
 import Light from "../Light/Light.component";
 import { faBoxTissue } from "@fortawesome/free-solid-svg-icons";
 import performance from "performance-now";
+import Video from "../ReactPlayer/ReactPlayer.component";
 
 // redux actions
 class Lights extends Component  {
@@ -14,11 +15,12 @@ class Lights extends Component  {
         lightsState:[false,false,false],
         beginStartSequence: false,
         lightsOut:false,
-        lightsOutTime: null
+        lightsOutTime: null,
+        showVideo: false,
+        reactionTimes:[],
     }
 
     componentDidMount(){
-        
         this.setState({...this.state, beginStartSequence:true}, 
             () => setTimeout(()=> this.lightSequence(), 1500)
         )
@@ -60,38 +62,60 @@ class Lights extends Component  {
     };
 
     reactionTime = (lightsOutTime, clickTime) =>{
+        const reactionTime = (clickTime - lightsOutTime) * 0.001;
+        const reactTimeDP = reactionTime.toFixed(3);
+
+        this.setState({
+            ...this.state,
+            reactionTimes:this.state.reactionTimes.push(reactTimeDP)
+        })
+
         if(!lightsOutTime){
             alert("FALSE START PLAYA")
             this.props.resetCounter();
         }
+        else if(this.props.attemptCount === 2){
+            this.setState({
+                ...this.state,
+                showVideo:true
+            })
+        }
         else{
-            const reactionTime = (clickTime - lightsOutTime) * 0.001;
-            const reactTimeDP = reactionTime.toFixed(3)
-            console.log(reactTimeDP);
+            alert("Your reaction time was " + reactTimeDP);
+            this.props.resetCounter(this.props.attemptCount + 1);
         }
     }
 
-
     render(){
         const {gameStart, id} = this.props;
-        const {lightsState, lightsOut, lightsOutTime, remount} = this.state;
-
+        const {reactionTimes,showVideo,lightsState, lightsOut, lightsOutTime, remount} = this.state;
+        const avg = reactionTimes.reduce( ( p, c ) => p + c, 0 ) / reactionTimes.length;
+        console.log(avg)
         return(
-        <LightsContainer
-        lightsOut={lightsOut} 
-        gameStart={gameStart} 
-        onMouseDown={() => 
-            {
-                const clickTime = performance(); 
-                this.reactionTime(lightsOutTime, clickTime);
-            }
-        }>
-            <LightsInnerContainer>
-                <Light lightsOn={lightsState[0]} />
-                <Light lightsOn={lightsState[1]} />
-                <Light lightsOn={lightsState[2]} />
-            </LightsInnerContainer>
-        </LightsContainer>
+            showVideo ?
+            // <div className="wrapper">
+            //     <h1 className="text-dark">TITLE</h1>
+                <Video
+                    averageTime={avg}
+                />
+            // </div>
+            
+            :
+            <LightsContainer
+            lightsOut={lightsOut} 
+            gameStart={gameStart} 
+            onMouseDown={() => 
+                {
+                    const clickTime = performance(); 
+                    this.reactionTime(lightsOutTime, clickTime);
+                }
+            }>
+                <LightsInnerContainer>
+                    <Light lightsOn={lightsState[0]} />
+                    <Light lightsOn={lightsState[1]} />
+                    <Light lightsOn={lightsState[2]} />
+                </LightsInnerContainer>
+            </LightsContainer>
         );
     }
 };

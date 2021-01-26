@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const LightsContainer = styled.div`
     position:relative;
-    height:90vh;
+    height:100%;
     width:100vw;
     background:#000000;
     display:block;
