@@ -16,8 +16,7 @@ class Lights extends Component  {
         beginStartSequence: false,
         lightsOut:false,
         lightsOutTime: null,
-        showVideo: false,
-        reactionTimes:[],
+        showVideo: false
     }
 
     componentDidMount(){
@@ -64,17 +63,14 @@ class Lights extends Component  {
     reactionTime = (lightsOutTime, clickTime) =>{
         const reactionTime = (clickTime - lightsOutTime) * 0.001;
         const reactTimeDP = reactionTime.toFixed(3);
-
-        this.setState({
-            ...this.state,
-            reactionTimes:this.state.reactionTimes.push(reactTimeDP)
-        })
+    
 
         if(!lightsOutTime){
             alert("FALSE START PLAYA")
             this.props.resetCounter();
         }
         else if(this.props.attemptCount === 2){
+            this.props.addFinalTime(reactTimeDP);
             this.setState({
                 ...this.state,
                 showVideo:true
@@ -82,24 +78,18 @@ class Lights extends Component  {
         }
         else{
             alert("Your reaction time was " + reactTimeDP);
-            this.props.resetCounter(this.props.attemptCount + 1);
+            this.props.resetCounter(this.props.attemptCount + 1, reactTimeDP);
         }
     }
 
     render(){
-        const {gameStart, id} = this.props;
-        const {reactionTimes,showVideo,lightsState, lightsOut, lightsOutTime, remount} = this.state;
+        const {gameStart, id, reactionTimes} = this.props;
+        const {showVideo,lightsState, lightsOut, lightsOutTime, remount} = this.state;
         const avg = reactionTimes.reduce( ( p, c ) => p + c, 0 ) / reactionTimes.length;
-        console.log(avg)
+
         return(
             showVideo ?
-            // <div className="wrapper">
-            //     <h1 className="text-dark">TITLE</h1>
-                <Video
-                    averageTime={avg}
-                />
-            // </div>
-            
+                <Video averageTime={avg.toFixed(3)}/>
             :
             <LightsContainer
             lightsOut={lightsOut} 

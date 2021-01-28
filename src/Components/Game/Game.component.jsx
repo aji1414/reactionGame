@@ -15,23 +15,33 @@ class Game extends Component{
     state={
         gameStart: false,
         attemptCount:0,
-        remountKey: (new Date()).getTime()
+        remountKey: (new Date()).getTime(),
+        reactionTimes:[]
     }
 
-    resetCounter = (newCount) => {
+    resetCounter = (newCount, reactionTime) => {
         let newCountFinal = this.state.attemptCount;
         if(newCount){newCountFinal = newCount;}
 
+        let newReactionTimes = this.state.reactionTimes;
+        if(reactionTime){
+            newReactionTimes = [...newReactionTimes, Number(reactionTime)]
+        }
         this.setState({
             ...this.state,
+          reactionTimes:newReactionTimes,
           remountKey: (new Date()).getTime(),
           attemptCount: newCountFinal
-        });
-      }
+        }, ()=> console.log(this.state.reactionTimes));
+    }
+
+    addFinalTime = (reactionTime) =>{
+        this.setState({...this.state, reactionTimes:[...this.state.reactionTimes, Number(reactionTime)]})
+    }
     
 
     render(){
-        const {gameStart, remountKey, attemptCount} = this.state;
+        const {gameStart, remountKey, attemptCount, reactionTimes} = this.state;
         
         return (
             <GameContainer  >
@@ -42,6 +52,8 @@ class Game extends Component{
                 key={remountKey}
                 attemptCount={attemptCount}
                 resetCounter={this.resetCounter}
+                reactionTimes={reactionTimes}
+                addFinalTime={this.addFinalTime}
                 />
                 :
                 <GamePreview  onClick={() => this.setState({...this.state, gameStart: true})}>
