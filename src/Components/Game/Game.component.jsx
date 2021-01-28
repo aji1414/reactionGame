@@ -14,7 +14,7 @@ class Game extends Component{
     
     state={
         gameStart: false,
-        attemptCount:0,
+        attemptCount:2,
         remountKey: (new Date()).getTime(),
         reactionTimes:[]
     }

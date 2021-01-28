@@ -12,7 +12,7 @@ import Video from "../ReactPlayer/ReactPlayer.component";
 class Lights extends Component  {
 
     state={
-        lightsState:[false,false,false],
+        lightsState:[true,true,true],
         beginStartSequence: false,
         lightsOut:false,
         lightsOutTime: null,
